@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace gradle.cfg['app.applicationId']
+    compileSdk Integer.parseInt(gradle.cfg['app.compileSdk'])
+
+    defaultConfig {
+        applicationId gradle.cfg['app.applicationId']
+        minSdk Integer.parseInt(gradle.cfg['app.minSdkVersion'])
+        targetSdk Integer.parseInt(gradle.cfg['app.targetSdkVersion'])
+        versionCode Integer.parseInt(gradle.cfg['app.versionCode'])
+        versionName gradle.cfg['app.versionName']
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:${gradle.cfg['ver.androidx.core.core-ktx']}"
+    implementation "androidx.appcompat:appcompat:${gradle.cfg['ver.androidx.appcompat']}"
+    implementation "com.google.android.material:material:${gradle.cfg['ver.com.google.android.material']}"
+
+    implementation "androidx.constraintlayout:constraintlayout:${gradle.cfg['ver.androidx.constraintlayout']}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${gradle.cfg['ver.androidx.lifecycle']}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${gradle.cfg['ver.androidx.lifecycle']}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${gradle.cfg['ver.androidx.navigation']}"
+    implementation "androidx.navigation:navigation-ui-ktx:${gradle.cfg['ver.androidx.navigation']}"
+
+    testImplementation "junit:junit:${gradle.cfg['ver.junit']}"
+    androidTestImplementation "androidx.test.ext:junit:${gradle.cfg['ver.androidx.junit']}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${gradle.cfg['ver.androidx.espresso']}"
+}
